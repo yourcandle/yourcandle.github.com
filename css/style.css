@@ -43,7 +43,7 @@ body {
 	background-color: #333333;
 }
 
-.fb-button button {
+.fb-button button, .file-button button {
     border: 1px solid rgba(255,255,255,.3);
     background-color: transparent;
     color: #FFF6DA;
@@ -56,12 +56,5 @@ body {
 }
 
 .file-button input {
-    border: 1px solid rgba(255,255,255,.3);
-    background-color: transparent;
-    color: #FFF6DA;
-    padding: 10px 30px;
-    width: 100%;
-    height: 60px;
-    font-family: 'Nanum Myeongjo', serif;
-    font-size: 24px;
+    display: none;
 }

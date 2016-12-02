@@ -45,6 +45,9 @@ window.onload = function() {
 
 }
 
+function file() {
+    $file.click();
+}
 
 function myFacebookLogin() {
     FB.login(function() {
