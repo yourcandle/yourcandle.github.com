@@ -26,6 +26,7 @@ body {
 	font-size: 48px;
 	font-family: 'Nanum Myeongjo', serif;
 	font-weight: 100;
+	padding: 0 20px;
 }
 
 .description {
@@ -72,9 +73,10 @@ body {
 		width: 100%;
 		text-align: center;
 		color: #FFF6DA;
-		font-size: 58px;
+		font-size: 56px;
 		font-family: 'Nanum Myeongjo', serif;
 		font-weight: 100;
+		padding: 0;
 	}
 
 	.description {
