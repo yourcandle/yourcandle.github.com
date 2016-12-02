@@ -38,9 +38,10 @@ body {
 }
 
 #preview {
-	margin: 0 15px 120px;
-	border: 0;
-	background-color: #333333;
+    margin: 0 20px 120px;
+    border: 0;
+    background-color: #333333;
+    color: transparent;
 }
 
 .fb-button button, .file-button button {
