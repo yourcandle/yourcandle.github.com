@@ -41,7 +41,8 @@ body {
 #preview {
     margin: 0 15px 40px;
     border: 0;
-    background-color: #333333;
+    background-image: url(/img/blank.png);
+    background-size: cover;
     color: transparent;
     width: 350px;
     height: 350px;
@@ -89,7 +90,7 @@ body {
 	}
 
 	#preview {
-	    margin: 0 15px 120px;
+	    margin: 0 15px 70px;
 	    border: 0;
 	    background-color: #333333;
 	    color: transparent;
@@ -112,4 +113,9 @@ body {
 	.file-button input {
 	    display: none;
 	}
+}
+
+.icons {
+	background-image: url(/img/icons.png);
+	background-size: cover;
 }

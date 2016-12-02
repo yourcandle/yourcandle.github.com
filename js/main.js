@@ -1,34 +1,24 @@
-var canvas = document.createElement('canvas');
-//캔버스 크기 설정
-canvas.width = 500; //가로 100px
-canvas.height = 500; //세로 100px
-var context = canvas.getContext("2d");
-context.globalCompositeOperation = "source-over";
-
 var $file = document.querySelector('#getfile');
 
-window.onload = function() {
-    $file.onchange = function() {
-        var fileList = $file.files;
+$file.onchange = function () {
+    var fileList = $file.files;
 
-        // 읽기
-        var reader = new FileReader();
-        reader.readAsDataURL(fileList[0]);
+    // 읽기
+    var reader = new FileReader();
+    reader.readAsDataURL(fileList[0]);
 
-        //로드 한 후
-        reader.onload = function () {
-            createProfile(reader.result);
-        };
+    //로드 한 후
+    reader.onload = function () {
+        createProfile(reader.result);
     };
+};
 
-}
-
-function file() {
+function file () {
     $file.click();
 }
 
-function myFacebookLogin() {
-    FB.login(function() {
+function myFacebookLogin () {
+    FB.login(function () {
         FB.api('/me/picture?width=500&height=500', function(response) {
             createProfile(response.data.url);
         });
@@ -38,6 +28,13 @@ function myFacebookLogin() {
 }
 
 function createProfile (profile) {
+    //캔버스 생성
+    var canvas = document.createElement('canvas');
+    canvas.width = 500; //가로 100px
+    canvas.height = 500; //세로 100px
+    var context = canvas.getContext("2d");
+    context.globalCompositeOperation = "source-over";
+
     //썸네일 이미지 생성
     var tempImage = new Image(); //drawImage 메서드에 넣기 위해 이미지 객체화
     tempImage.setAttribute('crossOrigin', 'anonymous'); //크로스 오리진 설정
@@ -53,7 +50,7 @@ function createProfile (profile) {
             context.drawImage(this, 0, 0, 500, 500);
 
             //캔버스에 그린 이미지를 다시 data-uri 형태로 변환
-            var dataURI = canvas.toDataURL("image/jpeg");
+            var dataURI = canvas.toDataURL("image/png");
 
             //썸네일 이미지 보여주기
             document.querySelector('#preview').src = dataURI;
