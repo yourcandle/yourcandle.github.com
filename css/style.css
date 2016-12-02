@@ -15,7 +15,7 @@ body {
 }
 
 .content {
-	width: 420px;
+	width: 380px;
 	margin: 50px auto;
 }
 
@@ -23,7 +23,7 @@ body {
 	width: 100%;
 	text-align: center;
 	color: #FFF6DA;
-	font-size: 58px;
+	font-size: 48px;
 	font-family: 'Nanum Myeongjo', serif;
 	font-weight: 100;
 }
@@ -31,17 +31,19 @@ body {
 .description {
 	width: 100%;
 	text-align: center;
-	font-size: 30px;
+	font-size: 25px;
 	color: #FFFFFF;
 	font-weight: 100;
 	opacity: .4;
 }
 
 #preview {
-    margin: 0 20px 120px;
+    margin: 0 15px 40px;
     border: 0;
     background-color: #333333;
     color: transparent;
+    width: 350px;
+    height: 350px;
 }
 
 .fb-button button, .file-button button {
@@ -58,4 +60,54 @@ body {
 
 .file-button input {
     display: none;
+}
+
+@media screen and (min-width: 970px)  {
+	.content {
+		width: 400px;
+		margin: 50px auto;
+	}
+
+	.title {
+		width: 100%;
+		text-align: center;
+		color: #FFF6DA;
+		font-size: 58px;
+		font-family: 'Nanum Myeongjo', serif;
+		font-weight: 100;
+	}
+
+	.description {
+		width: 100%;
+		text-align: center;
+		font-size: 30px;
+		color: #FFFFFF;
+		font-weight: 100;
+		opacity: .4;
+	}
+
+	#preview {
+	    margin: 0 15px 120px;
+	    border: 0;
+	    background-color: #333333;
+	    color: transparent;
+	    width: 380px;
+	    height: 380px;
+	}
+
+	.fb-button button, .file-button button {
+	    border: 1px solid rgba(255,255,255,.3);
+	    background-color: transparent;
+	    color: #FFF6DA;
+	    padding: 10px 30px;
+	    width: 100%;
+	    height: 60px;
+	    font-family: 'Nanum Myeongjo', serif;
+	    font-size: 24px;
+	    margin-bottom: 10px;
+	}
+
+	.file-button input {
+	    display: none;
+	}
 }
