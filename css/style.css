@@ -22,19 +22,20 @@ body {
 .title {
 	width: 100%;
 	text-align: center;
-	color: #FFF6DA;
-	font-size: 48px;
+	color: #ffe2bc;
+	font-size: 38px;
 	font-family: 'Nanum Myeongjo', serif;
 	font-weight: 100;
-	padding: 0 20px;
+	letter-spacing: 1px;
 }
 
 .description {
 	width: 100%;
 	text-align: center;
-	font-size: 25px;
+	font-size: 18px;
 	color: #FFFFFF;
 	font-weight: 100;
+	line-height: 1.4em;
 	opacity: .4;
 }
 
@@ -51,12 +52,12 @@ body {
 .fb-button button, .file-button button {
     border: 1px solid rgba(255,255,255,.3);
     background-color: transparent;
-    color: #FFF6DA;
+    color: #ffe2bc;
     padding: 10px 30px;
     width: 100%;
     height: 60px;
     font-family: 'Nanum Myeongjo', serif;
-    font-size: 24px;
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
@@ -105,7 +106,7 @@ body {
 	.fb-button button, .file-button button {
 	    border: 1px solid rgba(255,255,255,.3);
 	    background-color: transparent;
-	    color: #FFF6DA;
+	    color: #ffe2bc;
 	    padding: 10px 30px;
 	    width: 100%;
 	    height: 60px;
