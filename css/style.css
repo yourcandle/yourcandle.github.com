@@ -37,6 +37,7 @@ body {
 	font-weight: 100;
 	line-height: 1.4em;
 	opacity: .4;
+	font-family: 'Nanum Gothic', 'dotum', 'gulim';
 }
 
 #preview {
@@ -89,7 +90,7 @@ body {
 		color: #FFFFFF;
 		font-weight: 100;
 		opacity: .3;
-		font-family: 'Nanum Gothic';
+		font-family: 'Nanum Gothic', 'dotum', 'gulim';
 		line-height: 18px;
 		letter-spacing: 1px;
 	}
