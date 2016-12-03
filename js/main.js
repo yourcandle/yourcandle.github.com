@@ -40,8 +40,29 @@ function createProfile (profile, origin) {
     origin && tempImage.setAttribute('crossOrigin', origin); //크로스 오리진 설정
     tempImage.src = profile; //data-uri를 이미지 객체에 주입
     tempImage.onload = function() {
-        //이미지를 캔버스에 그리기
-        context.drawImage(this, 0, 0, 500, 500);
+        //정사각형
+        if (tempImage.width === tempImage.height) {
+            //이미지를 캔버스에 그리기
+            context.drawImage(this, 0, 0, 500, 500);
+        }
+        //가로가 긴 경우 -> 세로를 기준으로
+        else if (tempImage.width > tempImage.height) {
+            var ratio = 500 / tempImage.height;
+            var width = Math.round(tempImage.width * ratio);
+            var widthMargin = -Math.round((width - 500) / 2);
+
+            //이미지를 캔버스에 그리기
+            context.drawImage(this, widthMargin, 0, width, 500);
+        }
+        //세로가 긴 경우 -> 가로를 기준으로
+        else {
+            var ratio = 500 / tempImage.width;
+            var height = Math.round(tempImage.height * ratio);
+            var heightMargin = -Math.round((height - 500) / 2);
+
+            //이미지를 캔버스에 그리기
+            context.drawImage(this, 0, heightMargin, 500, height);
+        }
 
         var candleImage = new Image();
         candleImage.src = '/img/candle.png';
