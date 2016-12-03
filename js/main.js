@@ -1,11 +1,20 @@
 var $file = document.querySelector('#getfile');
+var $preview = document.querySelector('#preview');
+var $download = document.querySelector('#download');
+var $facebookButton = document.querySelector('.fb-button');
+var $uploadButton = document.querySelector('.file-button');
+var $downloadButton = document.querySelector('.download-button');
+var $restartButton = document.querySelector('.restart-button');
 
 $file.onchange = function () {
-    var fileList = $file.files;
+    //선택한 파일명
+    var file = $file.files[0];
+    //파일 인풋 초기화
+    $file.value = '';
 
     // 읽기
     var reader = new FileReader();
-    reader.readAsDataURL(fileList[0]);
+    reader.readAsDataURL(file);
 
     //로드 한 후
     reader.onload = function () {
@@ -74,21 +83,33 @@ function createProfile (profile, origin) {
             var dataURI = canvas.toDataURL('image/png');
 
             //썸네일 이미지 보여주기
-            document.querySelector('#preview').src = dataURI;
+            $preview.src = dataURI;
 
             //썸네일 이미지를 다운로드할 수 있도록 링크 설정
-            document.querySelector('#download').href = dataURI;
-            document.querySelector('#download-btn').href = dataURI;
-			
-			document.querySelector('.fb-button').style.display = 'none';
-			document.querySelector('.file-button').style.display = 'none';
-			document.querySelector('#download-btn').style.display = 'block';
-			document.querySelector('.page-reload').style.display = 'block';
+            $download.href = dataURI;
+
+            $facebookButton.style.display = 'none';
+            $uploadButton.style.display = 'none';
+            $downloadButton.style.display = 'block';
+            $restartButton.style.display = 'block';
         };
     };
 }
 
-document.querySelector('.page-reload').onclick = function () {
-	window.location.reload();
+function restart () {
+    //썸네일 이미지 보여주기
+    $preview.src = '';
+
+    //썸네일 이미지를 다운로드할 수 있도록 링크 설정
+    $download.href = '';
+
+    $facebookButton.style.display = 'block';
+    $uploadButton.style.display = 'block';
+    $downloadButton.style.display = 'none';
+    $restartButton.style.display = 'none';
 };
 
+function download () {
+    //window.open($preview.src.replace('data:image/png;', 'data:application/octet-stream;'));
+    window.open($preview.src, 'profile.png');
+}

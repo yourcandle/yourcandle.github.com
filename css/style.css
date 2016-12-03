@@ -62,7 +62,7 @@ body {
     height: 350px;
 }
 
-.fb-button button, .file-button button, #download-btn button, .page-reload button {
+.fb-button button, .file-button button, .download-button button, .restart-button button {
     border: 1px solid rgba(255,255,255,.3);
     background-color: transparent;
     color: #ffe2bc;
@@ -78,9 +78,11 @@ body {
 .file-button input {
     display: none;
 }
-#download-btn, .page-reload {
+
+.download-button, .restart-button {
 	display: none;
 }
+
 @media screen and (min-width: 970px)  {
 	.content {
 		width: 400px;
@@ -119,7 +121,7 @@ body {
 	    height: 380px;
 	}
 
-	.fb-button button, .file-button button {
+	.fb-button button, .file-button button, .download-button button, .restart-button button {
 	    border: 1px solid rgba(255,255,255,.3);
 	    background-color: transparent;
 	    color: #ffe2bc;

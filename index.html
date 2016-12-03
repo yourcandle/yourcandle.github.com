@@ -35,7 +35,7 @@
                 <h4 class="description">SNS 프로필에 촛불을 밝혀주세요.<br>(합성된 이미지는 다운로드하셔서 sns 프로필에 재업로드 하셔야 합니다.)</h4>
 
                 <div>
-                    <a id="download" download="profile.png" target="_blank" title="프로필 이미지 다운로드">
+                    <a id="download" download="profile.png" target="_blank">
                         <img id="preview" src="" alt="프로필 이미지">
                     </a>
                 </div>
@@ -47,17 +47,15 @@
                     <button onclick="file()"><i class="icons upload"></i> 사진 직접 업로드하기</button>
                     <input type="file" id="getfile" accept="image/*">
                 </div>
-				<div class="file-button">
-					<a id="download-btn" download="profile.png" target="_blank" title="프로필 이미지 다운로드">
-						<button><i class="icons download"></i> 다운로드</button>
-					</a>
+				<div class="download-button">
+                    <button onclick="download()"><i class="icons download"></i> 다운로드</button>
                 </div>
-				<div class="page-reload">
-					<button>다시하기</button>
+				<div class="restart-button">
+					<button onclick="restart()">다시하기</button>
 				</div>
             </div>
         </div>
 
-        <script src="/js/main.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
     </body>
 </html>
