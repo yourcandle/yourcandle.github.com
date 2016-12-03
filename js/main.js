@@ -57,6 +57,17 @@ function createProfile (profile) {
 
             //썸네일 이미지를 다운로드할 수 있도록 링크 설정
             document.querySelector('#download').href = dataURI;
+            document.querySelector('#download-btn').href = dataURI;
+			
+			document.querySelector('.fb-button').style.display = 'none';
+			document.querySelector('.file-button').style.display = 'none';
+			document.querySelector('#download-btn').style.display = 'block';
+			document.querySelector('.page-reload').style.display = 'block';
         };
     };
 }
+
+document.querySelector('.page-reload').onclick = function () {
+	window.location.reload();
+};
+
