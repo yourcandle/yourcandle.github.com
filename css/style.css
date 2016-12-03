@@ -74,7 +74,7 @@ body {
 		width: 100%;
 		text-align: center;
 		color: #ffe2bc;
-		font-size: 34px;
+		font-size: 38px;
 		font-family: 'Nanum Myeongjo', serif;
 		font-weight: 100;
 		padding: 0;
@@ -87,9 +87,10 @@ body {
 		font-size: 15px;
 		color: #FFFFFF;
 		font-weight: 100;
-		opacity: .4;
+		opacity: .3;
 		font-family: 'Nanum Gothic';
-		letter-spacing: 2px;
+		line-height: 18px;
+		letter-spacing: 1px;
 	}
 
 	#preview {
