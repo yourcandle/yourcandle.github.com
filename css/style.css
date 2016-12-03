@@ -137,6 +137,24 @@ body {
 }
 
 .icons {
+	display: inline-block;
 	background-image: url(/img/icons.png);
-	background-size: cover;
+	background-size: 18px auto;
+	width: 18px;
+	height: 18px;
+	margin-right: 7px;
+	vertical-align: text-top;
 }
+
+.icons.facebook {
+	background-position: 0px 0px;
+}
+
+.icons.upload {
+	background-position: 0px -46px;
+}
+
+.icons.download {
+	background-position: 0px -24px;
+}
+
