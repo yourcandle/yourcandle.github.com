@@ -109,7 +109,53 @@ function restart () {
     $restartButton.style.display = 'none';
 };
 
-function download () {
-    //window.open($preview.src.replace('data:image/png;', 'data:application/octet-stream;'));
-    window.open($preview.src, 'profile.png');
+function browser () {
+    var browserName = undefined;
+    var userAgent = navigator.userAgent;
+
+    switch (true) {
+        case /Trident|MSIE/.test(userAgent):
+            browserName = 'ie';
+            break;
+
+        case /Edge/.test(userAgent):
+            browserName = 'edge';
+            break;
+
+        case /KAKAOTALK/.test(userAgent):
+            browserName = 'kakaotalk';
+            break;
+
+        case /Chrome/.test(userAgent):
+            browserName = 'chrome';
+            break;
+
+        case /Safari/.test(userAgent):
+            browserName = 'safari';
+            break;
+
+        case /Firefox/.test(userAgent):
+            browserName = 'firefox';
+            break;
+
+        case /Opera/.test(userAgent):
+            browserName = 'opera';
+            break;
+
+        default:
+            browserName = 'unknown';
+    }
+    return browserName;
 }
+
+
+document.querySelector('#download').onclick = function (event) {
+    if (browser() !== 'chrome') {
+        event.preventDefault();
+        event.stopPropagation();
+
+        return alert('크롬 브라우저 외에는 다운로드가 정상적으로 동작하지 않습니다. 이미지를 눌러 저장하세요.');
+    }
+}
+
+

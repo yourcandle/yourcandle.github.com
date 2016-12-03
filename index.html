@@ -35,9 +35,7 @@
                 <h4 class="description">SNS 프로필에 촛불을 밝혀주세요.<br>(합성된 이미지는 다운로드하셔서 sns 프로필에 재업로드 하셔야 합니다.)</h4>
 
                 <div>
-                    <a id="download" download="profile.png" target="_blank">
-                        <img id="preview" src="" alt="프로필 이미지">
-                    </a>
+                    <img id="preview" src="" alt="프로필 이미지">
                 </div>
 
                 <div class="fb-button">
@@ -48,7 +46,9 @@
                     <input type="file" id="getfile" accept="image/*">
                 </div>
 				<div class="download-button">
-                    <button onclick="download()"><i class="icons download"></i> 다운로드</button>
+                    <a id="download" download="profile.png" target="_blank">
+                        <button><i class="icons download"></i> 다운로드</button>
+                    </a>
                 </div>
 				<div class="restart-button">
 					<button onclick="restart()">다시하기</button>
