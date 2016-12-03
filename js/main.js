@@ -9,7 +9,7 @@ $file.onchange = function () {
 
     //로드 한 후
     reader.onload = function () {
-        createProfile(reader.result);
+        createProfile(reader.result, null);
     };
 };
 
@@ -20,24 +20,24 @@ function file () {
 function myFacebookLogin () {
     FB.login(function () {
         FB.api('/me/picture?width=500&height=500', function(response) {
-            createProfile(response.data.url);
+            createProfile(response.data.url, 'anonymous');
         });
     }, {
         scope: 'user_about_me'
     });
 }
 
-function createProfile (profile) {
+function createProfile (profile, origin) {
     //캔버스 생성
     var canvas = document.createElement('canvas');
     canvas.width = 500; //가로 100px
     canvas.height = 500; //세로 100px
-    var context = canvas.getContext("2d");
-    context.globalCompositeOperation = "source-over";
+    var context = canvas.getContext('2d');
+    context.globalCompositeOperation = 'source-over';
 
     //썸네일 이미지 생성
     var tempImage = new Image(); //drawImage 메서드에 넣기 위해 이미지 객체화
-    tempImage.setAttribute('crossOrigin', 'anonymous'); //크로스 오리진 설정
+    origin && tempImage.setAttribute('crossOrigin', origin); //크로스 오리진 설정
     tempImage.src = profile; //data-uri를 이미지 객체에 주입
     tempImage.onload = function() {
         //이미지를 캔버스에 그리기
@@ -50,7 +50,7 @@ function createProfile (profile) {
             context.drawImage(this, 0, 0, 500, 500);
 
             //캔버스에 그린 이미지를 다시 data-uri 형태로 변환
-            var dataURI = canvas.toDataURL("image/png");
+            var dataURI = canvas.toDataURL('image/png');
 
             //썸네일 이미지 보여주기
             document.querySelector('#preview').src = dataURI;
