@@ -17,7 +17,7 @@
 }
 
 body {
-	background-image: url(/img/bg.png);
+	background-image: url(//cdn.rawgit.com/yourcandle/yourcandle.github.com/master/img//bg.png);
 	background-size: cover;
 }
 
@@ -55,7 +55,7 @@ body {
 #preview {
     margin: 0 15px 40px;
     border: 0;
-    background-image: url(/img/blank.png);
+    background-image: url(//cdn.rawgit.com/yourcandle/yourcandle.github.com/master/img/blank.png);
     background-size: cover;
     color: transparent;
     width: 350px;
@@ -140,7 +140,7 @@ body {
 
 .icons {
 	display: inline-block;
-	background-image: url(/img/icons.png);
+	background-image: url(//cdn.rawgit.com/yourcandle/yourcandle.github.com/master/img/icons.png);
 	background-size: 18px auto;
 	width: 18px;
 	height: 18px;
