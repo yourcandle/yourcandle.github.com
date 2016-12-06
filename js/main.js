@@ -5,6 +5,8 @@ var $facebookButton = document.querySelector('.fb-button');
 var $uploadButton = document.querySelector('.file-button');
 var $downloadButton = document.querySelector('.download-button');
 var $restartButton = document.querySelector('.restart-button');
+var $form = document.querySelector('#form');
+var $image = document.querySelector('#image');
 
 $file.onchange = function () {
     //선택한 파일명
@@ -84,9 +86,8 @@ function createProfile (profile, origin) {
 
             //썸네일 이미지 보여주기
             $preview.src = dataURI;
-
-            //썸네일 이미지를 다운로드할 수 있도록 링크 설정
-            $download.href = dataURI;
+            //다운로드를 위해 form 에 추가
+            $image.value = dataURI;
 
             $facebookButton.style.display = 'none';
             $uploadButton.style.display = 'none';
@@ -97,11 +98,8 @@ function createProfile (profile, origin) {
 }
 
 function restart () {
-    //썸네일 이미지 보여주기
+    //썸네일 이미지 리셋
     $preview.src = '';
-
-    //썸네일 이미지를 다운로드할 수 있도록 링크 설정
-    $download.href = '';
 
     $facebookButton.style.display = 'block';
     $uploadButton.style.display = 'block';
@@ -109,53 +107,6 @@ function restart () {
     $restartButton.style.display = 'none';
 };
 
-function browser () {
-    var browserName = undefined;
-    var userAgent = navigator.userAgent;
-
-    switch (true) {
-        case /Trident|MSIE/.test(userAgent):
-            browserName = 'ie';
-            break;
-
-        case /Edge/.test(userAgent):
-            browserName = 'edge';
-            break;
-
-        case /KAKAOTALK/.test(userAgent):
-            browserName = 'kakaotalk';
-            break;
-
-        case /Chrome/.test(userAgent):
-            browserName = 'chrome';
-            break;
-
-        case /Safari/.test(userAgent):
-            browserName = 'safari';
-            break;
-
-        case /Firefox/.test(userAgent):
-            browserName = 'firefox';
-            break;
-
-        case /Opera/.test(userAgent):
-            browserName = 'opera';
-            break;
-
-        default:
-            browserName = 'unknown';
-    }
-    return browserName;
+function download () {
+    $form.submit();
 }
-
-
-document.querySelector('#download').onclick = function (event) {
-    if (browser() !== 'chrome') {
-        event.preventDefault();
-        event.stopPropagation();
-
-        return alert('크롬 브라우저 외에는 다운로드가 정상적으로 동작하지 않습니다. 이미지를 눌러 저장하세요.');
-    }
-}
-
-

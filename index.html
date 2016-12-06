@@ -46,15 +46,17 @@
                     <input type="file" id="getfile" accept="image/*">
                 </div>
 				<div class="download-button">
-                    <a id="download" download="profile.png" target="_blank">
-                        <button><i class="icons download"></i> 다운로드</button>
-                    </a>
+                    <button onclick="download()"><i class="icons download"></i> 다운로드</button>
                 </div>
 				<div class="restart-button">
 					<button onclick="restart()">다시하기</button>
 				</div>
             </div>
         </div>
+
+        <form id="form" action="https://aidenahn.herokuapp.com/download" method="post">
+            <input type="hidden" id="image" name="image" value="">
+        </form>
 
         <script type="text/javascript" src="/js/main.js"></script>
     </body>
