@@ -7,8 +7,11 @@ var $downloadButton = document.querySelector('.download-button');
 var $restartButton = document.querySelector('.restart-button');
 var $form = document.querySelector('#form');
 var $image = document.querySelector('#image');
+var $loading = document.querySelector('#loading');
 
 $file.onchange = function () {
+    $loading.style.display = 'block';
+
     //선택한 파일명
     var file = $file.files[0];
     //파일 인풋 초기화
@@ -20,6 +23,7 @@ $file.onchange = function () {
 
     //로드 한 후
     reader.onload = function () {
+        $loading.style.display = 'none';
         createProfile(reader.result, null);
     };
 };
@@ -30,7 +34,9 @@ function file () {
 
 function myFacebookLogin () {
     FB.login(function () {
+        $loading.style.display = 'block';
         FB.api('/me/picture?width=500&height=500', function(response) {
+            $loading.style.display = 'none';
             createProfile(response.data.url, 'anonymous');
         });
     }, {
@@ -39,6 +45,8 @@ function myFacebookLogin () {
 }
 
 function createProfile (profile, origin) {
+    $loading.style.display = 'block';
+    
     //캔버스 생성
     var canvas = document.createElement('canvas');
     canvas.width = 500; //가로 100px
@@ -93,6 +101,7 @@ function createProfile (profile, origin) {
             $uploadButton.style.display = 'none';
             $downloadButton.style.display = 'block';
             $restartButton.style.display = 'block';
+            $loading.style.display = 'none';
         };
     };
 }
@@ -105,6 +114,7 @@ function restart () {
     $uploadButton.style.display = 'block';
     $downloadButton.style.display = 'none';
     $restartButton.style.display = 'none';
+    $loading.style.display = 'none';
 };
 
 function download () {
