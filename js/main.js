@@ -10,6 +10,8 @@ var $restartButtonWrapper = $('.restart-button-wrapper');
 var $restartButton = $('#restartButton');
 var $loading = $('#loading');
 var $downloadFrame = $('#downloadFrame');
+var $title = $('.title');
+var $description = $('.description');
 
 
 $fileButton.on('click', function () {
@@ -46,6 +48,8 @@ $facebookButton.on('click', function () {
 $restartButton.on('click', function () {
     $preview.attr('src', '');
 
+    $title.html('우리의 촛불은<br>꺼지지 않습니다');
+    $description.html('SNS 프로필에 촛불을 밝혀주세요.');
     $facebookButtonWrapper.show();
     $fileButtonWrapper.show();
     $downloadButtonWrapper.hide();
@@ -115,6 +119,8 @@ function createProfile (profile, origin) {
             //썸네일 이미지 보여주기
             $preview.attr('src', dataURI);
 
+            $title.html('촛불이 밝혀졌습니다');
+            $description.html('이미지를 다운로드 받으신 후<br>SNS에서 <u>반드시 재업로드</u> 하셔야 합니다.');
             $facebookButtonWrapper.hide();
             $fileButtonWrapper.hide();
             $downloadButtonWrapper.show();
