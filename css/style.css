@@ -173,12 +173,11 @@ body {
 
 .spinner {
 	display: inline-block;
-	margin: 50px;
 	height: 28px;
 	width: 28px;
 	position: absolute;
-	top: calc(50% - 38px);
-	left: calc(50% - 38px);
+	top: calc(50% - 14px);
+	left: calc(50% - 14px);
 	animation: rotate 0.8s infinite linear;
 	border: 8px solid #fff;
 	border-right-color: transparent;
