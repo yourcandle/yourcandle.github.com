@@ -62,7 +62,7 @@ body {
     height: 350px;
 }
 
-.fb-button button, .file-button button, .download-button button, .restart-button button {
+.fb-button-wrapper button, .file-button-wrapper button, .download-button-wrapper button, .restart-button-wrapper button {
     border: 1px solid rgba(255,255,255,.3);
     background-color: transparent;
     color: #ffe2bc;
@@ -75,12 +75,17 @@ body {
 	cursor: pointer;
 }
 
-.file-button input {
+.file-button-wrapper input {
     display: none;
 }
 
-.download-button, .restart-button {
+.download-button-wrapper, .restart-button-wrapper {
 	display: none;
+}
+
+#downloadFrame {
+	width: 0px;
+	height: 0px;
 }
 
 @media screen and (min-width: 970px)  {
@@ -121,7 +126,7 @@ body {
 	    height: 380px;
 	}
 
-	.fb-button button, .file-button button, .download-button button, .restart-button button {
+	.fb-button-wrapper button, .file-button-wrapper button, .download-button-wrapper button, .restart-button-wrapper button {
 	    border: 1px solid rgba(255,255,255,.3);
 	    background-color: transparent;
 	    color: #ffe2bc;
@@ -133,7 +138,7 @@ body {
 	    margin-bottom: 10px;
 	}
 
-	.file-button input {
+	.file-button-wrapper input {
 	    display: none;
 	}
 }

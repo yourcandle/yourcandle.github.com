@@ -1,51 +1,71 @@
-var $file = document.querySelector('#getfile');
-var $preview = document.querySelector('#preview');
-var $download = document.querySelector('#download');
-var $facebookButton = document.querySelector('.fb-button');
-var $uploadButton = document.querySelector('.file-button');
-var $downloadButton = document.querySelector('.download-button');
-var $restartButton = document.querySelector('.restart-button');
-var $form = document.querySelector('#form');
-var $image = document.querySelector('#image');
-var $loading = document.querySelector('#loading');
+var $fileInput = $('#fileInput');
+var $preview = $('#preview');
+var $facebookButtonWrapper = $('.fb-button-wrapper');
+var $facebookButton = $('#facebookButton');
+var $fileButtonWrapper = $('.file-button-wrapper');
+var $fileButton = $('#fileButton');
+var $downloadButtonWrapper = $('.download-button-wrapper');
+var $downloadButton = $('#downloadButton');
+var $restartButtonWrapper = $('.restart-button-wrapper');
+var $restartButton = $('#restartButton');
+var $loading = $('#loading');
+var $downloadFrame = $('#downloadFrame');
 
-$file.onchange = function () {
-    $loading.style.display = 'block';
 
-    //선택한 파일명
-    var file = $file.files[0];
-    //파일 인풋 초기화
-    $file.value = '';
+$fileButton.on('click', function () {
+    $fileInput.trigger('click');
+});
+$fileInput.on('change', function () {
+    $loading.show();
 
     // 읽기
     var reader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(this.files[0]);
 
     //로드 한 후
     reader.onload = function () {
-        $loading.style.display = 'none';
+        $loading.hide();
+        $fileInput.val('');
+
         createProfile(reader.result, null);
     };
-};
+});
 
-function file () {
-    $file.click();
-}
-
-function myFacebookLogin () {
+$facebookButton.on('click', function () {
     FB.login(function () {
-        $loading.style.display = 'block';
-        FB.api('/me/picture?width=500&height=500', function(response) {
-            $loading.style.display = 'none';
+        $loading.show();
+        FB.api('/me/picture?width=500&height=500', function (response) {
+            $loading.hide();
             createProfile(response.data.url, 'anonymous');
         });
     }, {
         scope: 'user_about_me'
     });
-}
+});
+
+$restartButton.on('click', function () {
+    $preview.attr('src', '');
+
+    $facebookButtonWrapper.show();
+    $fileButtonWrapper.show();
+    $downloadButtonWrapper.hide();
+    $restartButtonWrapper.hide();
+})
+
+$downloadButton.on('click', function () {
+    $loading.show();
+
+    $('<form action="https://aidenahn.herokuapp.com/download" method="post" target="downloadFrame"></form>')
+    .append($('<input type="hidden" name="image">').val($preview.attr('src')))
+    .appendTo('body').submit().remove();
+});
+
+$downloadFrame.on('load', function () {
+    $loading.hide();
+});
 
 function createProfile (profile, origin) {
-    $loading.style.display = 'block';
+    $loading.show();
     
     //캔버스 생성
     var canvas = document.createElement('canvas');
@@ -93,30 +113,14 @@ function createProfile (profile, origin) {
             var dataURI = canvas.toDataURL('image/png');
 
             //썸네일 이미지 보여주기
-            $preview.src = dataURI;
-            //다운로드를 위해 form 에 추가
-            $image.value = dataURI;
+            $preview.attr('src', dataURI);
 
-            $facebookButton.style.display = 'none';
-            $uploadButton.style.display = 'none';
-            $downloadButton.style.display = 'block';
-            $restartButton.style.display = 'block';
-            $loading.style.display = 'none';
+            $facebookButtonWrapper.hide();
+            $fileButtonWrapper.hide();
+            $downloadButtonWrapper.show();
+            $restartButtonWrapper.show();
+            $loading.hide();
         };
     };
 }
 
-function restart () {
-    //썸네일 이미지 리셋
-    $preview.src = '';
-
-    $facebookButton.style.display = 'block';
-    $uploadButton.style.display = 'block';
-    $downloadButton.style.display = 'none';
-    $restartButton.style.display = 'none';
-    $loading.style.display = 'none';
-};
-
-function download () {
-    $form.submit();
-}

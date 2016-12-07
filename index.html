@@ -41,18 +41,18 @@
                     <img id="preview" src="" alt="프로필 이미지">
                 </div>
 
-                <div class="fb-button">
-                    <button onclick="myFacebookLogin()"><i class="icons facebook"></i> 페북 프로필 가져오기</button>
+                <div class="fb-button-wrapper">
+                    <button id="facebookButton"><i class="icons facebook"></i> 페북 프로필 가져오기</button>
                 </div>
-                <div class="file-button">
-                    <button onclick="file()"><i class="icons upload"></i> 사진 직접 업로드하기</button>
-                    <input type="file" id="getfile" accept="image/*">
+                <div class="file-button-wrapper">
+                    <button id="fileButton"><i class="icons upload"></i> 사진 직접 선택하기</button>
+                    <input type="file" id="fileInput" accept="image/*">
                 </div>
-				<div class="download-button">
-                    <button onclick="download()"><i class="icons download"></i> 다운로드</button>
+				<div class="download-button-wrapper">
+                    <button id="downloadButton"><i class="icons download"></i> 다운로드</button>
                 </div>
-				<div class="restart-button">
-					<button onclick="restart()">다시하기</button>
+				<div class="restart-button-wrapper">
+					<button id="restartButton">다시하기</button>
 				</div>
             </div>
         </div>
@@ -61,10 +61,9 @@
             <div class="spinner"></div>
         </div>
 
-        <form id="form" action="https://aidenahn.herokuapp.com/download" method="post">
-            <input type="hidden" id="image" name="image" value="">
-        </form>
+        <iframe scrolling="no" frameborder="0" border="0" name="downloadFrame" id="downloadFrame"></iframe>
 
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
     </body>
 </html>
