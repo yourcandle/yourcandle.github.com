@@ -88,6 +88,27 @@ body {
 	height: 0px;
 }
 
+.rotate-button-wrapper {
+	text-align: center;
+}
+.rotate-button-wrapper #rotateButton {
+	background-color: transparent;
+	border: none;
+	font-size: 13px;
+	color: #999;
+	height: 30px;
+	margin-bottom: 10px;
+}
+.rotate-button-wrapper .icons.rotate {
+	background-image: url(../img/icons.png);
+	background-size: 100%;
+	background-position: 0px -154px;
+    width: 20px;
+    height: 20px;
+	vertical-align: middle;
+	margin: 0 0 1px 0;
+}
+
 @media screen and (min-width: 970px)  {
 	.content {
 		width: 400px;
@@ -118,7 +139,8 @@ body {
 	}
 
 	#preview {
-	    margin: 0 15px 70px;
+		display: block;
+	    margin: 0 auto 20px;
 	    border: 0;
 	    background-color: #333333;
 	    color: transparent;
