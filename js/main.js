@@ -27,7 +27,7 @@
     var getDeferCount = function () {
         return $.ajax('https://aidenahn.herokuapp.com/count', {dataType: 'json'})
             .then(function (result) {
-                return result[0].count;
+                return result.count;
             });
     };
 
