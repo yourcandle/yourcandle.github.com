@@ -89,6 +89,7 @@ body {
 }
 
 .rotate-button-wrapper {
+	display: none;
 	text-align: center;
 }
 .rotate-button-wrapper #rotateButton {
