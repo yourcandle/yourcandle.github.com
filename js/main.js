@@ -24,7 +24,12 @@
             deferred.resolve(this);
         };
     });
-    var deferCount = $.ajax('https://aidenahn.herokuapp.com/count', {dataType: 'json'});
+    var getDeferCount = function () {
+        return $.ajax('https://aidenahn.herokuapp.com/count', {dataType: 'json'})
+            .then(function (result) {
+                return result[0].count;
+            });
+    };
 
     var getDeferUserImage = function (src, origin) {
         return $.Deferred(function (deferred) {
@@ -52,7 +57,7 @@
     var createProfile = function () {
         $loading.show();
 
-        $.when(deferCandleImage, deferUserImage, deferCount)
+        $.when(deferCandleImage, deferUserImage, getDeferCount())
         .then(function (candleImage, userImage, count) {
 
             //캔버스 생성
@@ -61,9 +66,6 @@
             canvas.height = 500; //세로 100px
             var context = canvas.getContext('2d');
             context.globalCompositeOperation = 'source-over';
-
-            //캔버스 지움
-            // context.clearRect(0, 0, canvas.width, canvas.height);
             
             context.save();
 
@@ -107,7 +109,7 @@
             //썸네일 이미지 보여주기
             $preview.attr('src', dataURI);
 
-            $title.html(count[0].count + '번째<br>촛불이 밝혀졌습니다');
+            $title.html(count + ' 번째<br>촛불이 밝혀졌습니다');
             $description.html('이미지를 다운로드 받으신 후<br>SNS에서 <u>반드시 재업로드</u> 하셔야 합니다.');
             $facebookButtonWrapper.hide();
             $fileButtonWrapper.hide();
