@@ -120,7 +120,7 @@
             $downloadButtonWrapper.show();
             $restartButtonWrapper.show();
             $rotatekButtonWrapper.show();
-            $window.scrollTop();
+            $window.scrollTop(0);
 
             $loading.hide();
         });
@@ -181,7 +181,7 @@
         $downloadButtonWrapper.hide();
         $restartButtonWrapper.hide();
         $rotatekButtonWrapper.hide();
-        $window.scrollTop();
+        $window.scrollTop(0);
     });
 
     $downloadButton.on('click', function () {
