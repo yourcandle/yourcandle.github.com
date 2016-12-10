@@ -17,22 +17,22 @@
     var $title = $('.title');
     var $description = $('.description');
     var rotateCount = 0;
-    var deferUserImage = null;
-    var deferCandleImage = $.Deferred(function (deferred) {
+    var deferredUserImage = null;
+    var deferredCandleImage = $.Deferred(function (deferred) {
         var candleImage = new Image();
         candleImage.src = '/img/candle.png';
         candleImage.onload = function () {
             deferred.resolve(this);
         };
     });
-    var getDeferCount = function () {
+    var getDeferredCount = function () {
         return $.ajax('https://aidenahn.herokuapp.com/count', {dataType: 'json'})
             .then(function (result) {
                 return result.count;
             });
     };
 
-    var getDeferUserImage = function (src, origin) {
+    var getDeferredUserImage = function (src, origin) {
         return $.Deferred(function (deferred) {
             var userImage = new Image();
             if (origin) userImage.setAttribute('crossOrigin', origin);
@@ -43,7 +43,7 @@
         });
     };
 
-    var getDeferDataURI = function (file) {
+    var getDeferredDataURI = function (file) {
         return $.Deferred(function (deferred) {
             var reader = new FileReader();
             reader.readAsDataURL(file);
@@ -55,60 +55,63 @@
         });
     };
 
+    //사용자 이미지와 촛불 이미지를 합성해서 리턴
+    var getImageDataURI = function (userImage, candleImage) {
+        //캔버스 생성
+        var canvas = document.createElement('canvas');
+        canvas.width = 500; //가로 100px
+        canvas.height = 500; //세로 100px
+        var context = canvas.getContext('2d');
+        context.globalCompositeOperation = 'source-over';
+        
+        context.save();
+
+        //캔버스 회전
+        context.translate(canvas.width / 2, canvas.height / 2);
+        context.rotate(rotateCount * 90 * Math.PI / 180);
+        context.translate(-canvas.width / 2, -canvas.height / 2);
+        
+        //정사각형
+        if (userImage.width === userImage.height) {
+            //이미지를 캔버스에 그리기
+            context.drawImage(userImage, 0, 0, 500, 500);
+        }
+        //가로가 긴 경우 -> 세로를 기준으로
+        else if (userImage.width > userImage.height) {
+            var ratio = 500 / userImage.height;
+            var width = Math.round(userImage.width * ratio);
+            var widthMargin = -Math.round((width - 500) / 2);
+            
+            //이미지를 캔버스에 그리기
+            context.drawImage(userImage, widthMargin, 0, width, 500);
+        }
+        //세로가 긴 경우 -> 가로를 기준으로
+        else {
+            var ratio = 500 / userImage.width;
+            var height = Math.round(userImage.height * ratio);
+            var heightMargin = -Math.round((height - 500) / 2);
+            
+            //이미지를 캔버스에 그리기
+            context.drawImage(userImage, 0, heightMargin, 500, height);
+        }
+        
+        context.restore();
+
+        //이미지를 캔버스에 그리기
+        context.drawImage(candleImage, 0, 0, 500, 500);
+
+        //캔버스에 그린 이미지를 다시 data-uri 형태로 변환
+        return canvas.toDataURL('image/png');
+    };
+
     var createProfile = function () {
         $loading.show();
 
-        $.when(deferCandleImage, deferUserImage, getDeferCount())
-        .then(function (candleImage, userImage, count) {
-
-            //캔버스 생성
-            var canvas = document.createElement('canvas');
-            canvas.width = 500; //가로 100px
-            canvas.height = 500; //세로 100px
-            var context = canvas.getContext('2d');
-            context.globalCompositeOperation = 'source-over';
-            
-            context.save();
-
-            //캔버스 회전
-            context.translate(canvas.width / 2, canvas.height / 2);
-            context.rotate(rotateCount * 90 * Math.PI / 180);
-            context.translate(-canvas.width / 2, -canvas.height / 2);
-            
-            //정사각형
-            if (userImage.width === userImage.height) {
-                //이미지를 캔버스에 그리기
-                context.drawImage(userImage, 0, 0, 500, 500);
-            }
-            //가로가 긴 경우 -> 세로를 기준으로
-            else if (userImage.width > userImage.height) {
-                var ratio = 500 / userImage.height;
-                var width = Math.round(userImage.width * ratio);
-                var widthMargin = -Math.round((width - 500) / 2);
-                
-                //이미지를 캔버스에 그리기
-                context.drawImage(userImage, widthMargin, 0, width, 500);
-            }
-            //세로가 긴 경우 -> 가로를 기준으로
-            else {
-                var ratio = 500 / userImage.width;
-                var height = Math.round(userImage.height * ratio);
-                var heightMargin = -Math.round((height - 500) / 2);
-                
-                //이미지를 캔버스에 그리기
-                context.drawImage(userImage, 0, heightMargin, 500, height);
-            }
-            
-            context.restore();
-
-            //이미지를 캔버스에 그리기
-            context.drawImage(candleImage, 0, 0, 500, 500);
-
-            //캔버스에 그린 이미지를 다시 data-uri 형태로 변환
-            var dataURI = canvas.toDataURL('image/png');
+        $.when(deferredUserImage, deferredCandleImage, getDeferredCount())
+        .then(function (userImage, candleImage, count) {
 
             //썸네일 이미지 보여주기
-            $preview.attr('src', dataURI);
+            $preview.attr('src', getImageDataURI(userImage, candleImage));
 
             $title.html(count + ' 번째<br>촛불이 밝혀졌습니다');
             $description.html('이미지를 다운로드 받으신 후<br>SNS에서 <u>반드시 재업로드</u> 하셔야 합니다.');
@@ -123,17 +126,29 @@
         });
     };
 
+    var rotateProfile = function () {
+        $loading.show();
+
+        $.when(deferredUserImage, deferredCandleImage)
+        .then(function (userImage, candleImage) {
+
+            //썸네일 이미지 보여주기
+            $preview.attr('src', getImageDataURI(userImage, candleImage));
+            $loading.hide();
+        });
+    };
+
     $fileButton.on('click', function () {
         $fileInput.trigger('click');
     });
     $fileInput.on('change', function () {
         $loading.show();
 
-        getDeferDataURI(this.files[0])
+        getDeferredDataURI(this.files[0])
         .then(function (dataURI) {
             $loading.hide();
             $fileInput.val('');
-            deferUserImage = getDeferUserImage(dataURI, null);
+            deferredUserImage = getDeferredUserImage(dataURI, null);
             createProfile();
         });
     });
@@ -143,7 +158,7 @@
             $loading.show();
             FB.api('/me/picture?width=500&height=500', function (response) {
                 $loading.hide();
-                deferUserImage = getDeferUserImage(response.data.url, 'anonymous');
+                deferredUserImage = getDeferredUserImage(response.data.url, 'anonymous');
                 createProfile();
             });
         }, {
@@ -153,7 +168,7 @@
 
     $rotateButton.on('click', function() {
         rotateCount += 1;
-        createProfile();
+        rotateProfile();
     });
 
     $restartButton.on('click', function () {
