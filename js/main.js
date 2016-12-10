@@ -1,4 +1,5 @@
 (function () {
+    var $window = $(window);
     var $fileInput = $('#fileInput');
     var $preview = $('#preview');
     var $rotatekButtonWrapper = $('.rotate-button-wrapper');
@@ -116,6 +117,7 @@
             $downloadButtonWrapper.show();
             $restartButtonWrapper.show();
             $rotatekButtonWrapper.show();
+            $window.scrollTop();
 
             $loading.hide();
         });
@@ -164,6 +166,7 @@
         $downloadButtonWrapper.hide();
         $restartButtonWrapper.hide();
         $rotatekButtonWrapper.hide();
+        $window.scrollTop();
     });
 
     $downloadButton.on('click', function () {
