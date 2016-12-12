@@ -102,6 +102,10 @@ body {
 }
 
 @media screen and (min-width: 970px)  {
+    body {
+        background-size: initial;
+    }
+
     .content {
         width: 400px;
         margin: 80px auto;
