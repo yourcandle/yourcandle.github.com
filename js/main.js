@@ -101,7 +101,7 @@
         context.drawImage(candleImage, 0, 0, 500, 500);
 
         //캔버스에 그린 이미지를 다시 data-uri 형태로 변환
-        return canvas.toDataURL('image/png');
+        return canvas.toDataURL('image/jpeg', 0.9);
     };
 
     var createProfile = function () {
